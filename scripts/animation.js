@@ -5,7 +5,7 @@ var load = [];
 
 var programCode = function(processingInstance) {
 	with(processingInstance) {
-		size(600, 600);
+		size(1200, 600);
 		frameRate(30);
 		var mouseIsPressed = false;
 		
@@ -89,6 +89,14 @@ var programCode = function(processingInstance) {
 			}
 			return (p.get());
 		}; // Creates a pixel art image
+		
+		var scenes = [
+			[],
+		];
+		
+		// block tiles
+		{}
+		var blocks = {};
 		
 		draw = function () {
 			background(0, 25, 0);
