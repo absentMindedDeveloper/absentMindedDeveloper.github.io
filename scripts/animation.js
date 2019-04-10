@@ -5,7 +5,7 @@ var load = [];
 
 var programCode = function(processingInstance) {
 	with(processingInstance) {
-		size(1200, 600);
+		size(1024, 512);
 		frameRate(30);
 		var mouseIsPressed = false;
 		
@@ -78,7 +78,7 @@ var programCode = function(processingInstance) {
 			if (!p) {
 				return;
 			}
-			p.background(255, 55, 255, 0);
+			p.background(255, 255, 255, 0);
 			p.noStroke();
 
 			for (var y = 0; y < pixmap.length; y++) {
@@ -89,17 +89,32 @@ var programCode = function(processingInstance) {
 			}
 			return (p.get());
 		}; // Creates a pixel art image
-		
-		var scenes = [
-			[],
-		];
-		
 		// block tiles
 		{}
 		var blocks = {};
 		
+		
+		var scenes = [
+			[],
+		];
+		var tiles = [];
+		var Load = function () {
+			for(var i = 0; i < scenes.length; i++) {
+				for(var y = 0; y < scenes[i].length; y++) {
+					for(var x = 0; x < scenes[i][y]; x++) {
+						tiles.push({
+							x: (x * 32) + (i * 1024),
+							y: (y * 32),
+							image: blocks[scenes[i][y][x]].image
+						});
+					}
+				}
+			}
+		};
+		
+		
 		draw = function () {
-			background(0, 125, 0);
+			background(125, 125, 125);
 		};
 		
 		mousePressed = function() {
