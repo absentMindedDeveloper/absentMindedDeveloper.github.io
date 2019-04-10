@@ -90,31 +90,101 @@ var programCode = function(processingInstance) {
 			return (p.get());
 		}; // Creates a pixel art image
 		// block tiles
-		{}
-		var blocks = {};
-		
-		
-		var scenes = [
-			[],
-		];
-		var tiles = [];
-		var Load = function () {
-			for(var i = 0; i < scenes.length; i++) {
-				for(var y = 0; y < scenes[i].length; y++) {
-					for(var x = 0; x < scenes[i][y]; x++) {
-						tiles.push({
-							x: (x * 32) + (i * 1024),
-							y: (y * 32),
-							image: blocks[scenes[i][y][x]].image
-						});
-					}
-				}
+		{
+			var sky = Pixel([
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF',
+        'FFFFFFFFFFFFFFFF'], colors, 2);
+			var nothing = Pixel([
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa',
+        'aaaaaaaaaaaaaaaa'], colors, 2);
+		}
+		var blocks = {
+			' ': {
+				name: 'nothing',
+				image: nothing
+			},
+			'!': {
+				name: 'sky',
+				image: sky
 			}
 		};
 		
 		
+		var scenes = [
+			['!!!!!!!!','!!!'],
+			['!!!!']
+		];
+		var tiles = [];
+		var scroll = 0;
+		var Load = function () {
+			for(var i = 0; i < scenes.length; i++) {
+				console.log('i');
+				for(var y = 0; y < scenes[i].length; y++) {
+					console.log('y');
+					for(var x = 0; x < scenes[i][y].length; x++) {
+						if(blocks[scenes[i][y][x]] !== undefined) {
+							tiles.push({
+								x: (x * 32) + (i * 1024),
+								y: (y * 32),
+								image: blocks[scenes[i][y][x]].image
+							});
+						} else {
+							console.log(undefined);
+							tiles.push({
+								x: (x * 32) + (i * 1024),
+								y: (y * 32),
+								image: blocks[' '].image
+							});
+						}
+					}
+				}
+			}
+		};
+		Load();
+		
 		draw = function () {
 			background(125, 125, 125);
+			for(var i = 0; i < tiles.length; i++) {
+				var t = tiles[i];
+				image(t.image, t.x + scroll, t.y);
+			}
+		};
+		
+		keyPressed = function () {
+			if(keyCode === 37) {
+				scroll += 4;
+			}
+			if(keyCode === 39) {
+				scroll -= 4;
+			}
 		};
 		
 		mousePressed = function() {
