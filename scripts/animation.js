@@ -99,7 +99,7 @@ var programCode = function(processingInstance) {
 		var blocks = {};
 		
 		draw = function () {
-			background(0, 25, 0);
+			background(0, 125, 0);
 		};
 		
 		mousePressed = function() {
