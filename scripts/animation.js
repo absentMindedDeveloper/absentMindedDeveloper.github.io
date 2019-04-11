@@ -72,7 +72,6 @@ var programCode = function(processingInstance) {
 			' ': color(255, 255, 255, 0), // transparent
 		};
 		
-		
 		var Pixel = function(pixmap, colors, pixelsize) {
 			var p = createGraphics(pixmap[0].length * pixelsize, pixmap.length * pixelsize, JAVA2D);
 			if (!p) {
@@ -89,6 +88,13 @@ var programCode = function(processingInstance) {
 			}
 			return (p.get());
 		}; // Creates a pixel art image
+		var Composite = function(images) {
+			var p = createGraphics(32, 32, JAVA2D);
+			for (var i = 0; i < images.length; i++) {
+				p.image(images[i], 0, 0);
+			}
+			return (p.get());
+		};
 		// block tiles
 		{
 			var sky = Pixel([
@@ -142,6 +148,7 @@ var programCode = function(processingInstance) {
         '  6dc7d7d67666  ',
         '  6d67d7d676d6  ',
         '  6d67d77d76d6  '], colors, 2);
+			var pillarMiddleSky = Composite([sky, pillarMiddle]);
 		}
 		var blocks = {
 			' ': {
