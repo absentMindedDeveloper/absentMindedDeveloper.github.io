@@ -125,6 +125,23 @@ var programCode = function(processingInstance) {
         'aaaaaaaaaaaaaaaa',
         'aaaaaaaaaaaaaaaa',
         'aaaaaaaaaaaaaaaa'], colors, 2);
+			var pillarMiddle = Pixel([
+        '  6d67d77d76d6  ',
+        '  6d67d77d76d6  ',
+        '  6d67d77d76d6  ',
+        '  6c67d776d6d6  ',
+        '  6d67dd7d76d6  ',
+        '  6d67d6dd7c66  ',
+        '  6d67d77d76d6  ',
+        '  6d67d77d76d6  ',
+        '  6d67d77d76d6  ',
+        '  6d6dd77d76d6  ',
+        '  6d67677d76d6  ',
+        '  6d67d77d76d6  ',
+        '  6667d7dd76d6  ',
+        '  6dc7d7d67666  ',
+        '  6d67d7d676d6  ',
+        '  6d67d77d76d6  '], colors, 2);
 		}
 		var blocks = {
 			' ': {
@@ -134,12 +151,19 @@ var programCode = function(processingInstance) {
 			'!': {
 				name: 'sky',
 				image: sky
+			},
+			'#': {
+				name: 'pillar middle',
+				image: pillarMiddleSky
 			}
 		};
 		
 		
 		var scenes = [
-			['!!!!!!!!','!!!'],
+			[
+				'!!!!!!!!!!!',
+				'#!!!!!!!!!#'
+			],
 			['!!!!']
 		];
 		var tiles = [];
