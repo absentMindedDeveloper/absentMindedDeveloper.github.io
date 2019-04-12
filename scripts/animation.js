@@ -89,7 +89,7 @@ var programCode = function(processingInstance) {
 			return (p.get());
 		}; // Creates a pixel art image
 		var Composite = function(images) {
-			var p = createGraphics(32, 32, JAVA2D);
+			var p = createGraphics(64, 64, JAVA2D);
 			for (var i = 0; i < images.length; i++) {
 				p.image(images[i], 0, 0);
 			}
@@ -182,6 +182,112 @@ var programCode = function(processingInstance) {
         'dddddddddddddddd',
         '7777777777777777',
         'dddddddddddddddd'], colors, 4);
+			var wallBlank = Pixel([
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT',
+        'TTTTTTTTTTTTTTTT'], colors, 4);
+			var wallPanel = Pixel([
+        'PPPPPPPPPPPPPPPP',
+        'RRRRRRRRRRRRRRRR',
+        'QRRQQRRQQRRQRQQR',
+        'QQQQQQQQQQRQQQQQ',
+        'OOOOOOOOOOOOOOOO',
+        'QQQOQQQOQQQOQQQO',
+        'PQQOQQQOQPQOQQQO',
+        'QPQOQQQOQPQOQQPO',
+        'PQQOQPQOPQQOQPQO',
+        'PQPOPPQOQPQOPPQO',
+        'PPPOPQPOPPPOPPPO',
+        'PPQOPPPOPPQOQPPO',
+        'PPPOPQPOPQPOPPPO',
+        'PPPOPPPOPPPOPPPO',
+        'PPPOPPPOPPPOPPPO',
+        'OOOOOOOOOOOOOOOO'], colors, 4);
+			var windowTopLeft = Pixel([
+        'POOOOOOOOOOOOOOO',
+        'OQPPQPPPPQPPQQQP',
+        'OPQQRQQQQQQQQRRQ',
+        'OPQRRRRRRRRRRRRR',
+        'OPQROOOOOOOOOOOO',
+        'OQQRO           ',
+        'OQRRO           ',
+        'OPQRO           ',
+        'OPQRO           ',
+        'OQRRO           ',
+        'OQQRO           ',
+        'OPQRO           ',
+        'OQRRO           ',
+        'OQRRO           ',
+        'OPQRO           ',
+        'OPQRO           '], colors, 4);
+			var windowTopRight = Pixel([
+        'OOOOOOOOOOOOOOOP',
+        'PPQQPQQPPQQPPPQO',
+        'QQRRQQRQQRQQQQPO',
+        'RRRRRRRRRRRRRQPO',
+        'OOOOOOOOOOOORRQO',
+        '           ORQPO',
+        '           ORQPO',
+        '           ORQPO',
+        '           ORQPO',
+        '           ORQQO',
+        '           ORQPO',
+        '           ORQPO',
+        '           ORQQO',
+        '           ORRQO',
+        '           ORRQO',
+        '           ORQPO'], colors, 4);
+			var windowBottomLeft = Pixel([
+        'OPQRO           ',
+        'OQRRO           ',
+        'OQRRO           ',
+        'OQQRO           ',
+        'OPQRO           ',
+        'OPQRO           ',
+        'OQQRO           ',
+        'OPQRO           ',
+        'OPQRO           ',
+        'OPQRO           ',
+        'OPQRO           ',
+        'OQRROOOOOOOOOOOO',
+        'OPQRRRRRRRRRRRRR',
+        'OPQQQQRQQRQQRRQQ',
+        'OQPPPQQPPQQPQQPP',
+        'POOOOOOOOOOOOOOO'], colors, 4);
+			var windowBottomRight = Pixel([
+        '           ORQPO',
+        '           ORQPO',
+        '           ORRQO',
+        '           ORRQO',
+        '           ORQPO',
+        '           ORQQO',
+        '           ORRQO',
+        '           ORQPO',
+        '           ORQPO',
+        '           ORRQO',
+        '           ORQQO',
+        'OOOOOOOOOOOORQPO',
+        'RRRRRRRRRRRRRQPO',
+        'QRRQQQQQQQQRQQPO',
+        'PQQQPPQPPPPQPPQO',
+        'OOOOOOOOOOOOOOOP'], colors, 4);
+			var windowTopLeftSky = Composite([sky, windowTopLeft]);
+			var windowTopRightSky = Composite([sky, windowTopRight]);
+			var windowBottomLeftSky = Composite([sky, windowBottomLeft]);
+			var windowBottomRightSky = Composite([sky, windowBottomRight]);
 		}
 		var blocks = {
 			' ': {
@@ -203,6 +309,30 @@ var programCode = function(processingInstance) {
 			'%': {
 				name: 'pillar bottom',
 				image: pillarBottom
+			},
+			'&': {
+				name: 'wall blank',
+				image: wallBlank
+			},
+			'(': {
+				name: 'wall panel',
+				image: wallPanel
+			},
+			')': {
+				name: 'window top left',
+				image: windowTopLeftSky
+			},
+			'*': {
+				name: 'window top right',
+				image: windowTopRightSky
+			},
+			'+': {
+				name: 'window bottom left',
+				image: windowBottomLeftSky
+			},
+			',': {
+				name: 'window bottom right',
+				image: windowBottomRightSky
 			}
 		};
 		
@@ -210,12 +340,12 @@ var programCode = function(processingInstance) {
 		var scenes = [
 			[
 				'$$$$$$$$$$$$$$$$',
-				'#!!!!!!!!!!!!!!#',
-				'#!!!!!!!!!!!!!!#',
-				'#!!!!!!!!!!!!!!#',
-				'#!!!!!!!!!!!!!!#',
-				'#!!!!!!!!!!!!!!#',
-				'#!!!!!!!!!!!!!!#',
+				'#&&&&&&&&&&&&&&#',
+				'#&&&&&&&&&&&&&&#',
+				'#&&)*&&&&&&&&&&#',
+				'#&&+,&&&&&&&&&&#',
+				'#&&&&&&&&&&&&&&#',
+				'#((((((((((((((#',
 				'%%%%%%%%%%%%%%%%'
 				
 			],
