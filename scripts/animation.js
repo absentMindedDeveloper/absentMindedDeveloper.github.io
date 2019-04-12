@@ -6,7 +6,7 @@ var load = [];
 var programCode = function(processingInstance) {
 	with(processingInstance) {
 		size(1024, 512);
-		frameRate(30);
+		frameRate(60);
 		var mouseIsPressed = false;
 		
 		var colors = {
@@ -113,7 +113,7 @@ var programCode = function(processingInstance) {
         'FFFFFFFFFFFFFFFF',
         'FFFFFFFFFFFFFFFF',
         'FFFFFFFFFFFFFFFF',
-        'FFFFFFFFFFFFFFFF'], colors, 2);
+        'FFFFFFFFFFFFFFFF'], colors, 4);
 			var nothing = Pixel([
         'aaaaaaaaaaaaaaaa',
         'aaaaaaaaaaaaaaaa',
@@ -130,25 +130,58 @@ var programCode = function(processingInstance) {
         'aaaaaaaaaaaaaaaa',
         'aaaaaaaaaaaaaaaa',
         'aaaaaaaaaaaaaaaa',
-        'aaaaaaaaaaaaaaaa'], colors, 2);
+        'aaaaaaaaaaaaaaaa'], colors, 4);
 			var pillarMiddle = Pixel([
-        '  6d67d77d76d6  ',
-        '  6d67d77d76d6  ',
-        '  6d67d77d76d6  ',
-        '  6c67d776d6d6  ',
-        '  6d67dd7d76d6  ',
-        '  6d67d6dd7c66  ',
-        '  6d67d77d76d6  ',
-        '  6d67d77d76d6  ',
-        '  6d67d77d76d6  ',
-        '  6d6dd77d76d6  ',
-        '  6d67677d76d6  ',
-        '  6d67d77d76d6  ',
-        '  6667d7dd76d6  ',
-        '  6dc7d7d67666  ',
-        '  6d67d7d676d6  ',
-        '  6d67d77d76d6  '], colors, 2);
-			var pillarMiddleSky = Composite([sky, pillarMiddle]);
+        'c6cd6d77d7d66c6c',
+        'c6cd6d77d7d6dc6c',
+        'c6cd6d77d7d6dc6c',
+        'c6c6cd77d7d6dc6c',
+        'c6cd66ddd7d6dcc5',
+        'c6cd6d77d7d6dc6c',
+        'c6cd6d77d76c6c6c',
+        'cc5d6d77d7d6dc6c',
+        'c6cd6d77d7d6dc6c',
+        'c6cd6d77d7d6dc6c',
+        'c6cd6d77d7d6dc6c',
+        'c6c6cd77d7d6d5cc',
+        'c6cd6d77d7d6dc6c',
+        'c6cd6d776dd6dc6c',
+        'c6cd6d77d7d6dc6c',
+        'c6cd6d77d7d6dc6c'], colors, 4);
+			var pillarTop = Pixel([
+        '6666666666666666',
+        '6777777767777777',
+        'cdddddddcddddddd',
+        'cc66666ccc66666c',
+        'dddddddddddddddd',
+        'ddddddd66ddddddd',
+        'dd66dd6776dd66dd',
+        'd6776d6776d6776d',
+        'd677767dd767776d',
+        '66d776d66d677d66',
+        '766d7d6776d7d667',
+        '7776d677776d6777',
+        '7776d677776d6777',
+        'dd76667dd76667dd',
+        '6ddd6dddddd6ddd6',
+        '6666666666666666'], colors, 4);
+			var pillarBottom = Pixel([
+        'cccccccccccccccc',
+        '7777777777777777',
+        '77ddd77d7d77ddd7',
+        '7d777d77d77d777d',
+        '7d7777d777d7777d',
+        '77dd777ddd777dd7',
+        '7777777777777777',
+        'cccccccccccccccc',
+        '5555555555555555',
+        'dddddddddddddddd',
+        '7777777777777777',
+        'dddddddddddddddd',
+        'dddddddddddddddd',
+        'dddddddddddddddd',
+        '7777777777777777',
+        'dddddddddddddddd'], colors, 4);
 		}
 		var blocks = {
 			' ': {
@@ -161,15 +194,30 @@ var programCode = function(processingInstance) {
 			},
 			'#': {
 				name: 'pillar middle',
-				image: pillarMiddleSky
+				image: pillarMiddle
+			},
+			'$': {
+				name: 'pillar top',
+				image: pillarTop
+			},
+			'%': {
+				name: 'pillar bottom',
+				image: pillarBottom
 			}
 		};
 		
 		
 		var scenes = [
 			[
-				'!!!!!!!!!!!',
-				'#!!!!!!!!!#'
+				'$$$$$$$$$$$$$$$$',
+				'#!!!!!!!!!!!!!!#',
+				'#!!!!!!!!!!!!!!#',
+				'#!!!!!!!!!!!!!!#',
+				'#!!!!!!!!!!!!!!#',
+				'#!!!!!!!!!!!!!!#',
+				'#!!!!!!!!!!!!!!#',
+				'%%%%%%%%%%%%%%%%'
+				
 			],
 			['!!!!']
 		];
@@ -182,11 +230,20 @@ var programCode = function(processingInstance) {
 					console.log('y');
 					for(var x = 0; x < scenes[i][y].length; x++) {
 						if(blocks[scenes[i][y][x]] !== undefined) {
-							tiles.push({
-								x: (x * 32) + (i * 1024),
-								y: (y * 32),
-								image: blocks[scenes[i][y][x]].image
-							});
+							if(blocks[scenes[i][y][x]].wide !== undefined) {
+								tiles.push({
+									x: (x * 64) + (i * 1024),
+									y: (y * 64),
+									image: blocks[scenes[i][y][x]].image
+								});
+							} else {
+								tiles.push({
+									x: (x * 64) + (i * 1024),
+									y: (y * 64),
+									image: blocks[scenes[i][y][x]].image,
+									wide: true
+								});
+							}
 						} else {
 							console.log(undefined);
 							tiles.push({
@@ -205,7 +262,11 @@ var programCode = function(processingInstance) {
 			background(125, 125, 125);
 			for(var i = 0; i < tiles.length; i++) {
 				var t = tiles[i];
-				image(t.image, t.x + scroll, t.y);
+				if(t.wide !== undefined) {
+					image(t.image, t.x + scroll, t.y);
+				} else {
+					image(t.image, t.x + scroll - 16, t.y);
+				}
 			}
 		};
 		
