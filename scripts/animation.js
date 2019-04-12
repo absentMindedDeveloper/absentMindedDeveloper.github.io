@@ -289,6 +289,34 @@ var programCode = function(processingInstance) {
 			var windowBottomLeftSky = Composite([sky, windowBottomLeft]);
 			var windowBottomRightSky = Composite([sky, windowBottomRight]);
 		}
+		// item tiles
+		{
+			var potStand = Pixel([
+        '                ',
+        '     aaaaaa     ',
+        '    a4VVVV4a    ',
+        '   abVaaaaVba   ',
+        '   abbVVVVbba   ',
+        '   a4bbbbbb4a   ',
+        '  aa444bb444aa  ',
+        ' aPOaa4444aaOPa ',
+        ' aPPOOaaaaOOPPa ',
+        '  aPPPOOOOPPPa  ',
+        '   aaaPPPPaaa   ',
+        '   accaaaacca   ',
+        '   a6cabbac6a   ',
+        '   a6cabbac6a   ',
+        '   a6cabbac6a   ',
+        '   a6ca5bac6a   ',
+        '   a6ca55ac6a   ',
+        '  a66ca55ac66a  ',
+        '  a6caa55aac6a  ',
+        ' aa6caa55aac6aa ',
+        'add6caa55aac6dda',
+        'ad66ca aa ac66da',
+        ' acca      acca ',
+        '  aa        aa  '], colors, 4);
+		}
 		var blocks = {
 			' ': {
 				name: 'nothing',
@@ -335,7 +363,11 @@ var programCode = function(processingInstance) {
 				image: windowBottomRightSky
 			}
 		};
-		
+		var items = {
+			'pot stand': {
+				image: potStand
+			}
+		};
 		
 		var scenes = [
 			[
@@ -351,6 +383,15 @@ var programCode = function(processingInstance) {
 			],
 			['!!!!']
 		];
+		var mapItems = [
+			[
+				{
+					name: 'pot stand',
+					x: 3,
+					y: 6
+				}
+			],
+		];
 		var tiles = [];
 		var scroll = 0;
 		var Load = function () {
@@ -360,18 +401,26 @@ var programCode = function(processingInstance) {
 					console.log('y');
 					for(var x = 0; x < scenes[i][y].length; x++) {
 						if(blocks[scenes[i][y][x]] !== undefined) {
-							if(blocks[scenes[i][y][x]].wide !== undefined) {
+							if(blocks[scenes[i][y][x]].wide === true) {
 								tiles.push({
 									x: (x * 64) + (i * 1024),
 									y: (y * 64),
-									image: blocks[scenes[i][y][x]].image
+									image: blocks[scenes[i][y][x]].image,
+									wide: true
+								});
+							} else if(blocks[scenes[i][y][x]].tall === true) {
+								tiles.push({
+									x: (x * 64) + (i * 1024),
+									y: (y * 64),
+									image: blocks[scenes[i][y][x]].image,
+									tall: true
 								});
 							} else {
 								tiles.push({
 									x: (x * 64) + (i * 1024),
 									y: (y * 64),
 									image: blocks[scenes[i][y][x]].image,
-									wide: true
+									tall: true
 								});
 							}
 						} else {
@@ -392,10 +441,18 @@ var programCode = function(processingInstance) {
 			background(125, 125, 125);
 			for(var i = 0; i < tiles.length; i++) {
 				var t = tiles[i];
-				if(t.wide !== undefined) {
-					image(t.image, t.x + scroll, t.y);
-				} else {
+				if(t.wide === true) {
 					image(t.image, t.x + scroll - 16, t.y);
+				} else if(t.tall === true) {
+					image(t.image, t.x + scroll, t.y - 32);
+				} else {
+					image(t.image, t.x + scroll, t.y - 32);
+				}
+			}
+			for(var i = 0; i < mapItems.length; i++) {
+				for(var j = 0; j < mapItems[i].length; j++) {
+					var item = mapItems[i][j];
+					image(items[item.name].image, (item.x * 64) + (i * 1024) + scroll, (item.y * 64) - 64); 
 				}
 			}
 		};
