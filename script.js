@@ -4,18 +4,11 @@ var programCode = function(processingInstance) {
 		frameRate(60);
 		var mouseIsPressed = false;
 		
+		// the maximum fade value
 		var fade = 175;
-		var fadeChange = 0;
-		var col = fade;
 		
-		var epilepsy = 255;
-		var speed = 10;
-		var epilChange = -speed;
-		var flash = false;
 		
-		var timer = 0;
-		var timerChange = 1;
-		
+		// function for text with a single column
 		var Text = function(str, size) {
 			this.str = str;
 			this.size = size;
@@ -32,6 +25,8 @@ var programCode = function(processingInstance) {
 			textLeading(this.size * 1.5);
 			text(this.final, 498, 300);
 		};
+		
+		// function for text with two columns
 		var SplitText = function (str1, str2, size) {
 			this.str1 = str1;
 			this.str2 = str2;
@@ -56,11 +51,14 @@ var programCode = function(processingInstance) {
 			text(this.right, 516, 300);
 		};
 		
+		// stores all of the frames
 		var frames = [
 			new Text([]),
 			new Text(['Evangel Classical School', 'presents'], 42),
 			new Text(['The Grail'], 46),
-			new Text(['VERY heavily inspired by', 'MONTY PYTHON', 'and the', 'HOLY GRAIL'], 32),
+			new Text(['probably influenced by', '', 'MONTY PYTHON', 'and the', 'HOLY GRAIL'], 32),
+			new Text(['fine, fine', 'HEAVILY inspired by', '', 'MONTY PYTHON', 'and the ', 'HOLY GRAIL'], 32),
+			new Text(['Pretty much copied from', '', 'MONTY PYTHON', 'and the', 'HOLY GRAIL', '', 'now rated PG'], 32),
 			new Text(['adapted and directed', 'by', 'MAGGIE HIGGINS'], 32),
 			new Text(['facilities provided', 'by', 'RECLAMATION CHURCH'], 32),
 			new SplitText(['Franz Overman', 'Gideon Marlatt', 'Laird Marlatt', 'Reese Paine', 'K̶e̶l̶l̶y̶ ̶D̶u̶r̶h̶a̶m̶', 'Kelly Durham'], ['King Arthur', 'Sir Bedevere', 'Sir Launcelot', 'Sir Robin', 'S̶i̶r̶ ̶H̶a̶d̶ ̶a̶ ̶g̶a̶l̶', 'Sir Gallahad'], 32),
@@ -68,19 +66,41 @@ var programCode = function(processingInstance) {
 			new Text(['also also featuring', 'Timothy Durham', 'Evelyn Funden', 'Kaitlyn Hall', 'Bazen Hevia', 'Calvin Higgins', 'Autumn Marlatt', 'Natasha Pohli'], 26),
 			new Text(['these people were here too', 'Tatyona Pohli', 'Abigail Sarr', 'Elizabeth Sarr', 'Aaron vanderBeken', 'Abigail vanderBeken', 'Isaiah vanderBeken', 'Veronica Yerina'], 26),
 		];
+		
+		// changes the fade
+		var fadeChange = 0;
+		// stores the current fade value
+		var col = fade;
+		
+		// the color flashing
+		var epilepsy = 255;
+		// the speed at which the screen flashes
+		var speed = 10;
+		// the actual number that changes
+		var epilChange = -speed;
+		// whether or not it is flashing
+		var flash = false;
+		
+		// determines when it is time to change each seem
+		var timer = 0;
+		var timerChange = 1;
+		
+		// the current frame being shown
 		var cur = 0;
 		var serif = createFont('serif');
 		draw = function () {
 			textFont(serif);
-			var currentFrame = floor(cur);
 			fade += fadeChange;
+			
+			// changes the background if flash is turned on
 			if(flash) {
 				background(255, epilepsy, 50);
 			} else {
 				background(0, 0, 0);
 			}
+			// increments the background if it is flashing
 			epilepsy += epilChange;
-			
+			// resets to make the color flash
 			if(epilepsy > 255) {
 				epilChange = -speed;
 			}
@@ -88,29 +108,40 @@ var programCode = function(processingInstance) {
 				epilChange = speed;
 			}
 			
+			// increments the timer
 			timer += timerChange;
+			
+			// scene ends
  			if(timer > 300) {
 				timer = 0;
 				timerChange = 0;
 				fadeChange = -3;
 			}
+			// scene has completely faded out
 			if(fade < 0) {
 				fadeChange = 3;
 				cur++;
 			}
+			// the fade in completes
 			if(fade > col) {
 				fadeChange = 0;
 				fade = col;
 				timer = 0;
 				timerChange = 1;
 			}
+			
+			// determines when the flash starts
 			if(cur > frames.length) {
 				flash = true;
 			}
+			
+			// draws the current text if it is defined
 			if(frames[cur] !== undefined) {
 				frames[cur].draw();
 			}
-			if(cur === 6) {
+			
+			// adds the starring text the sixth frame
+			if(cur === 8) {
 				textSize(32);
 				textAlign(CENTER, CENTER);
 				text('Starring', 498, 125);
