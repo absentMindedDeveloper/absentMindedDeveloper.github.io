@@ -58,13 +58,14 @@ var programCode = function(processingInstance) {
 			new Text(['The Grail'], 46),
 			new Text(['probably influenced by', '', 'MONTY PYTHON', 'and the', 'HOLY GRAIL'], 32),
 			new Text(['fine, fine', 'HEAVILY inspired by', '', 'MONTY PYTHON', 'and the ', 'HOLY GRAIL'], 32),
-			new Text(['Pretty much copied from', '', 'MONTY PYTHON', 'and the', 'HOLY GRAIL', '', 'now rated PG'], 32),
+			new Text(['pretty much copied from', '', 'MONTY PYTHON', 'and the', 'HOLY GRAIL', '', 'now rated PG'], 32),
 			new Text(['adapted and directed', 'by', 'MAGGIE HIGGINS'], 32),
 			new Text(['facilities provided', 'by', 'RECLAMATION CHURCH'], 32),
 			new SplitText(['Franz Overman', 'Gideon Marlatt', 'Laird Marlatt', 'Reese Paine', 'K̶e̶l̶l̶y̶ ̶D̶u̶r̶h̶a̶m̶', 'Kelly Durham'], ['King Arthur', 'Sir Bedevere', 'Sir Launcelot', 'Sir Robin', 'S̶i̶r̶ ̶H̶a̶d̶ ̶a̶ ̶g̶a̶l̶', 'Sir Gallahad'], 32),
 			new Text(['also featuring', 'Bonnie Bour', 'Dineke Bour', 'Henry Callender', 'Gresham Callender', 'Theodore Callender', 'Thomas Callender', 'Cheyenne Crane', 'Elizabeth Durham'], 26),
 			new Text(['also also featuring', 'Timothy Durham', 'Evelyn Funden', 'Kaitlyn Hall', 'Bazen Hevia', 'Calvin Higgins', 'Autumn Marlatt', 'Natasha Pohli'], 26),
 			new Text(['these people were here too', 'Tatyona Pohli', 'Abigail Sarr', 'Elizabeth Sarr', 'Aaron vanderBeken', 'Abigail vanderBeken', 'Isaiah vanderBeken', 'Veronica Yerina'], 26),
+			new SplitText(['Lighting Manager', '', 'Assistant to the Lighting Manager', '', 'Assistant to the Assistant\nto the Lighting Manager'], ['Thomas Callender', '', 'Sam Rothenberger', '', 'Isaiah vanderBeken'], 26)
 		];
 		
 		// changes the fade
@@ -88,6 +89,13 @@ var programCode = function(processingInstance) {
 		// the current frame being shown
 		var cur = 0;
 		var serif = createFont('serif');
+		var spotlight = {
+			x: -100,
+			y: 650,
+			xc: 3,
+			yc: -3,
+			ycc: 0.01666,
+		};
 		draw = function () {
 			textFont(serif);
 			fade += fadeChange;
@@ -146,8 +154,21 @@ var programCode = function(processingInstance) {
 				textAlign(CENTER, CENTER);
 				text('Starring', 498, 125);
 			}
+			if(cur === 12) {
+				noStroke();
+				spotlight.x += spotlight.xc;
+				spotlight.y += spotlight.yc;
+				spotlight.yc += spotlight.ycc;
+				for(var i = 0; i < 20; i++) {
+					fill(255, 255, 255, 20 - i);
+					ellipse(spotlight.x, spotlight.y, 160 + i * 2, 160 + i * 2);
+				}
+			}
 		};
-		
+	
+		keyPressed = function () {
+			timer = 301;
+		};
 	}
 };
 // Get the canvas that ProcessingJS will use
