@@ -69,6 +69,7 @@ var programCode = function(processingInstance) {
 			new Text(['featuring', 'the special voice talents', 'of', 'KAITLYN HALL'], 32),
 			new Text(['Gastronomies prepared by', 'Jolie Hall', 'Kaitlyn Hall', 'Autumn Marlatt'], 26),
 			new Text(['Practices chaperoned by', 'Arike Bour', 'Leila Bowers'], 30),
+			new SplitText(['Set design', 'Stage design', 'Lighting design', 'Costumer', 'Casting', 'Props design', 'Heraldry', 'Choreographer', 'Voice coach', 'Assistant to the director', 'Personal assistant to the director'], ['Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins'], 28),
 			new Text(['a special thanks', 'to the parents', 'FOR PUTTING UP WITH THIS NONSENSE', 'EVERY TUESDAY'], 26),
 			new Text(['as well as', 'MR. SEAN HIGGINS', 'for having an', 'amazing beard'], 30),
 			new SplitText(['Lighting Manager', '', 'Assistant to the Lighting Manager', '', 'Assistant to the Assistant\nto the Lighting Manager'], ['Thomas Callender', '', 'Sam Rothenberger', '', 'Isaiah vanderBeken'], 26)
