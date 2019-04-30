@@ -62,9 +62,15 @@ var programCode = function(processingInstance) {
 			new Text(['adapted and directed', 'by', 'MAGGIE HIGGINS'], 32),
 			new Text(['facilities provided', 'by', 'RECLAMATION CHURCH'], 32),
 			new SplitText(['Franz Overman', 'Gideon Marlatt', 'Laird Marlatt', 'Reese Paine', 'K̶e̶l̶l̶y̶ ̶D̶u̶r̶h̶a̶m̶', 'Kelly Durham'], ['King Arthur', 'Sir Bedevere', 'Sir Launcelot', 'Sir Robin', 'S̶i̶r̶ ̶H̶a̶d̶ ̶a̶ ̶g̶a̶l̶', 'Sir Gallahad'], 32),
-			new Text(['also featuring', 'Bonnie Bour', 'Dineke Bour', 'Henry Callender', 'Gresham Callender', 'Theodore Callender', 'Thomas Callender', 'Cheyenne Crane', 'Elizabeth Durham'], 26),
-			new Text(['also also featuring', 'Timothy Durham', 'Evelyn Funden', 'Kaitlyn Hall', 'Bazen Hevia', 'Calvin Higgins', 'Autumn Marlatt', 'Natasha Pohli'], 26),
+			new Text(['also featuring', 'Bonnie Bour', 'Dineke Bour', 'Henry Callender', 'Gresham Callender', 'Theodore Callender', 'Thomas Callender', 'Cheyenne Crane'], 26),
+			new Text(['also also featuring', 'Elizabeth Durham', 'Timothy Durham', 'Evelyn Funden', 'Bazen Hevia', 'Calvin Higgins', 'Autumn Marlatt', 'Natasha Pohli'], 26),
 			new Text(['these people were here too', 'Tatyona Pohli', 'Abigail Sarr', 'Elizabeth Sarr', 'Aaron vanderBeken', 'Abigail vanderBeken', 'Isaiah vanderBeken', 'Veronica Yerina'], 26),
+			new Text(['with the guest appearances', 'of', 'ANDREW JAMES BOWERS', 'JONATHAN ANDREW SARR'], 30),
+			new Text(['featuring', 'the special voice talents', 'of', 'KAITLYN HALL'], 32),
+			new Text(['Gastronomies prepared by', 'Jolie Hall', 'Kaitlyn Hall', 'Autumn Marlatt'], 26),
+			new Text(['Practices chaperoned by', 'Arike Bour', 'Leila Bowers'], 30),
+			new Text(['a special thanks', 'to the parents', 'FOR PUTTING UP WITH THIS NONSENSE', 'EVERY TUESDAY'], 26),
+			new Text(['as well as', 'MR. SEAN HIGGINS', 'for having an', 'amazing beard'], 30),
 			new SplitText(['Lighting Manager', '', 'Assistant to the Lighting Manager', '', 'Assistant to the Assistant\nto the Lighting Manager'], ['Thomas Callender', '', 'Sam Rothenberger', '', 'Isaiah vanderBeken'], 26)
 		];
 		
@@ -154,7 +160,7 @@ var programCode = function(processingInstance) {
 				textAlign(CENTER, CENTER);
 				text('Starring', 498, 125);
 			}
-			if(cur === 12) {
+			if(cur === 15) {
 				noStroke();
 				spotlight.x += spotlight.xc;
 				spotlight.y += spotlight.yc;
