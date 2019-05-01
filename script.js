@@ -46,12 +46,21 @@ var programCode = function(processingInstance) {
 			}
 			textSize(this.size);
 			textAlign(RIGHT, CENTER);
+			textLeading(this.size * 1.5);
 			text(this.left, 480, 300);
 			textAlign(LEFT, CENTER);
 			text(this.right, 516, 300);
 		};
 		
 		// stores all of the frames
+		/** 
+		 * 10 - nixon
+		 * 13 - Sack
+		 * 14 -second sack
+		 * 15-18 moose stuff
+		 * 19 - total sack
+		 * 20 - change of credits
+		 **/
 		var frames = [
 			new Text([]),
 			new Text(['Evangel Classical School', 'presents'], 42),
@@ -62,17 +71,22 @@ var programCode = function(processingInstance) {
 			new Text(['adapted and directed', 'by', 'MAGGIE HIGGINS'], 32),
 			new Text(['facilities provided', 'by', 'RECLAMATION CHURCH'], 32),
 			new SplitText(['Franz Overman', 'Gideon Marlatt', 'Laird Marlatt', 'Reese Paine', 'K̶e̶l̶l̶y̶ ̶D̶u̶r̶h̶a̶m̶', 'Kelly Durham'], ['King Arthur', 'Sir Bedevere', 'Sir Launcelot', 'Sir Robin', 'S̶i̶r̶ ̶H̶a̶d̶ ̶a̶ ̶g̶a̶l̶', 'Sir Gallahad'], 32),
-			new Text(['also featuring', 'Bonnie Bour', 'Dineke Bour', 'Henry Callender', 'Gresham Callender', 'Theodore Callender', 'Thomas Callender', 'Cheyenne Crane'], 26),
-			new Text(['also also featuring', 'Elizabeth Durham', 'Timothy Durham', 'Evelyn Funden', 'Bazen Hevia', 'Calvin Higgins', 'Autumn Marlatt', 'Natasha Pohli'], 26),
-			new Text(['these people were here too', 'Tatyona Pohli', 'Abigail Sarr', 'Elizabeth Sarr', 'Aaron vanderBeken', 'Abigail vanderBeken', 'Isaiah vanderBeken', 'Veronica Yerina'], 26),
-			new Text(['with the guest appearances', 'of', 'ANDREW JAMES BOWERS', 'JONATHAN ANDREW SARR'], 30),
-			new Text(['featuring', 'the special voice talents', 'of', 'KAITLYN HALL'], 32),
-			new Text(['Gastronomies prepared by', 'Jolie Hall', 'Kaitlyn Hall', 'Autumn Marlatt'], 26),
+			new Text(['also appearing', 'Bonnie Bour', 'Dineke Bour', 'Henry Callender', 'Gresham Callender', 'Theodore Callender', 'Thomas Callender', 'Cheyenne Crane'], 29),
+			new Text(['also also appearing', 'Elizabeth Durham', 'Timothy Durham', 'Evelyn Funden', 'Bazen Hevia', 'Calvin Higgins', 'Autumn Marlatt', 'Natasha Pohli'], 29),
+			new Text(['these people were here too', 'Tatyana Pohli', 'Abigail Sarr', 'Elizabeth Sarr', 'Aaron vanderBeken', 'Abigail vanderBeken', 'Isaiah vanderBeken', 'Veronika Yerina'], 29),
+			new Text(['with the guest appearances', 'of', 'ANDREW JAMES BOWERS', 'JONATHAN ANDREW SARR', 'and', 'the special voice talents', 'of', 'KAITLYN HALL'], 32),
+			new Text(['Gastronomies prepared by', 'Jolie Hall', 'Kaitlyn Hall', 'Autumn Marlatt'], 30),
 			new Text(['Practices chaperoned by', 'Arike Bour', 'Leila Bowers'], 30),
-			new SplitText(['Set design', 'Stage design', 'Lighting design', 'Costumer', 'Casting', 'Props design', 'Heraldry', 'Choreographer', 'Voice coach', 'Assistant to the director', 'Personal assistant to the director'], ['Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins', 'Maggie Higgins'], 28),
+			new SplitText(['Stage manager', 'Assistant stage manager', 'Stage hands', '', '', ''], ['Thomas Callender', 'Kaitlyn Hall', 'Addison Hall', 'Merian Bowers', 'Anne Callender', 'Hallie Higgins'], 30),
+			new SplitText(['Lighting Manager', 'Assistant to the Lighting Manager', 'Assistant to the Assistant', 'to the Lighting Manager'], ['Thomas Callender', 'Sam Rothenberger', '', 'Isaiah vanderBeken'], 26),
 			new Text(['a special thanks', 'to the parents', 'FOR PUTTING UP WITH THIS NONSENSE', 'EVERY TUESDAY'], 26),
 			new Text(['as well as', 'MR. SEAN HIGGINS', 'for having an', 'amazing beard'], 30),
-			new SplitText(['Lighting Manager', '', 'Assistant to the Lighting Manager', '', 'Assistant to the Assistant\nto the Lighting Manager'], ['Thomas Callender', '', 'Sam Rothenberger', '', 'Isaiah vanderBeken'], 26)
+			new Text(['We apologize for the fault in the', 'subtitles. Those responsible have been', 'sacked.'], 42),
+			new Text(['We apologize again for the fault in the', 'subtitles. Those responsible for sacking', 'the people who have just been sacked,', 'have been sacked.'], 42),
+			new SplitText(['Set design', 'Stage design', 'Lighting design', 'Costumer', 'Casting', 'Props design', 'Møøse Costuming'], ['MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'YUTTE HERMSGERVØRDENBRØTBØRDA'], 28),
+			new SplitText(['Heraldry', 'Choreographer', 'Voice coach', 'Assistant to the director', 'Personal assistant to the director'], ['MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS'], 28),
+			new SplitText(['Special Møøse Effects', 'Møøse Costumes', 'Antler Design'], ['Carol Sluys', 'Keelah Higgins', 'David Light'], 30),
+			new SplitText(['Designer', 'Møøse choreographed by by', 'Miss Taylor\'s Møøses by', 'Møøse trained to mix concrete and', 'sign complicated insurance forms by'], ['Peter Pohli', 'Erin Pakinas', 'Kara Rothenberger', '', 'Ron vanderBeken'], 30),
 		];
 		
 		// changes the fade
