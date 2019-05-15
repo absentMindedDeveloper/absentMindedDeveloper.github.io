@@ -74,7 +74,7 @@ var programCode = function(processingInstance) {
 			new Text(['also appearing', 'Bonnie Bour', 'Dineke Bour', 'Henry Callender', 'Gresham Callender', 'Theodore Callender', 'Thomas Callender', 'Cheyenne Crane'], 29),
 			new Text(['also also appearing', 'Elizabeth Durham', 'Timothy Durham', 'Evelyn Funden', 'Bazen Hevia', 'Calvin Higgins', 'Autumn Marlatt', 'Natasha Pohli'], 29),
 			new Text(['these people were here too', 'Tatyana Pohli', 'Abigail Sarr', 'Elizabeth Sarr', 'Aaron vanderBeken', 'Abigail vanderBeken', 'Isaiah vanderBeken', 'Veronika Yerina'], 29),
-			new Text(['with the guest appearances', 'of', 'ANDREW JAMES BOWERS', 'JONATHAN ANDREW SARR', 'and', 'the special voice talents', 'of', 'KAITLYN HALL'], 32),
+			new Text(['also featuring', 'the special voice talents', 'of', 'KAITLYN HALL'], 32),
 			new Text(['Gastronomies prepared by', 'Jolie Hall', 'Kaitlyn Hall', 'Autumn Marlatt'], 30),
 			new Text(['Practices chaperoned by', 'Arike Bour', 'Leila Bowers'], 30),
 			new SplitText(['Stage manager', 'Assistant stage manager', 'Stage hands', '', '', ''], ['Thomas Callender', 'Kaitlyn Hall', 'Addison Hall', 'Merian Bowers', 'Anne Callender', 'Hallie Higgins'], 30),
@@ -85,8 +85,12 @@ var programCode = function(processingInstance) {
 			new Text(['We apologize again for the fault in the', 'subtitles. Those responsible for sacking', 'the people who have just been sacked,', 'have been sacked.'], 42),
 			new SplitText(['Set design', 'Stage design', 'Lighting design', 'Costumer', 'Casting', 'Props design', 'Møøse Costuming'], ['MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'YUTTE HERMSGERVØRDENBRØTBØRDA'], 28),
 			new SplitText(['Heraldry', 'Choreographer', 'Voice coach', 'Assistant to the director', 'Personal assistant to the director'], ['MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS', 'MAGGIE HIGGINS'], 28),
-			new SplitText(['Special Møøse Effects', 'Møøse Costumes', 'Antler Design'], ['Carol Sluys', 'Keelah Higgins', 'David Light'], 30),
-			new SplitText(['Designer', 'Møøse choreographed by by', 'Miss Taylor\'s Møøses by', 'Møøse trained to mix concrete and', 'sign complicated insurance forms by'], ['Peter Pohli', 'Erin Pakinas', 'Kara Rothenberger', '', 'Ron vanderBeken'], 30),
+			new SplitText(['Special Møøse Effects', 'Møøse Costumes', 'Antler Design'], ['PASTOR SCOTT', 'KEELAH HIGGINS', 'DAVID LIGHT'], 30),
+			new SplitText(['Designer', 'Møøse choreographed by by', 'Miss Taylor\'s Møøses by', 'Møøse trained to mix concrete and', 'sign complicated insurance forms by'], ['PETER POLHI', 'ERIN PAKINAS', 'KARA ROTHENBERGER', '', 'RON VANDERBEKEN'], 30),
+			new SplitText(['Digital Guru', 'Møøse noses wiped by', 'Large møøse on the left-hand side', 'of the screen in the third scene from the', 'end, given a thorough grounding in Latin,', 'French and \'O\' Level Geography by', 'Suggestive poses for the moose suggest by', 'Antler-care by'], ['myself.. I mean GRESHAM CALLENDER', 'BJØRN IRKESTØM-SLATER WALKER', '', '', '', 'DOUGLAS WILSON ⁽ᵐᵃʸ ʰᵉ ˡᶦᵛᵉ ᶠᵒʳᵉᵛᵉʳ⁾', 'IMPERATOR NERO CLADIUS DIVI CLAUDIUS', 'FATHER CHRISTMAS'], 26),
+			new Text(['The directors of the firm hired to', 'continue the credits after the other', 'people had been sacked, wish it to', 'be known that they have just been', 'sacked.', '', 'The credits have been completed', 'in an entirely different style at great', 'expense and at the last minute.'], 38),
+			new Text([]),
+			new Text(['𝐸𝑥𝑒𝑐𝑢𝑡𝑖𝑣𝑒 𝑃𝑟𝑜𝑑𝑢𝑐𝑒𝑟', 'TED & \'RALPH\' THE WONDER LLAMA'], 32),
 		];
 		
 		// changes the fade
@@ -140,27 +144,35 @@ var programCode = function(processingInstance) {
 			// increments the timer
 			timer += timerChange;
 			
-			// scene ends
- 			if(timer > 300) {
-				timer = 0;
-				timerChange = 0;
-				fadeChange = -3;
+			if(cur <= 27) {
+				// scene ends
+				if(timer > 300) {
+					timer = 0;
+					timerChange = 0;
+					fadeChange = -3;
+				}
+				// scene has completely faded out
+				if(fade < 0) {
+					fadeChange = 3;
+					cur++;
+				}
+				// the fade in completes
+				if(fade > col) {
+					fadeChange = 0;
+					fade = col;
+					timer = 0;
+					timerChange = 1;
+				}
 			}
-			// scene has completely faded out
-			if(fade < 0) {
-				fadeChange = 3;
-				cur++;
+			else if(cur > 27) {
+				if(timer > 360) {
+					timer = 0;
+					cur++;
+				}
+				fade = 0;
 			}
-			// the fade in completes
-			if(fade > col) {
-				fadeChange = 0;
-				fade = col;
-				timer = 0;
-				timerChange = 1;
-			}
-			
 			// determines when the flash starts
-			if(cur > frames.length) {
+			if(cur > 27) {
 				flash = true;
 			}
 			
