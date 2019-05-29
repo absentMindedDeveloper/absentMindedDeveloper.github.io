@@ -91,6 +91,7 @@ var programCode = function(processingInstance) {
 			new Text(['The directors of the firm hired to', 'continue the credits after the other', 'people had been sacked, wish it to', 'be known that they have just been', 'sacked.', '', 'The credits have been completed', 'in an entirely different style at great', 'expense and at the last minute.'], 38),
 			new Text([]),
 			new Text(['𝐸𝑥𝑒𝑐𝑢𝑡𝑖𝑣𝑒 𝑃𝑟𝑜𝑑𝑢𝑐𝑒𝑟', 'TED & \'RALPH\' THE WONDER LLAMA'], 32),
+			new Text(['test'], 32)
 		];
 		
 		// changes the fade
@@ -163,12 +164,12 @@ var programCode = function(processingInstance) {
 					timer = 0;
 					timerChange = 1;
 				}
-			}
-			else if(cur > 27) {
+			} else if(cur > 27) {
 				if(timer > 360) {
 					timer = 0;
 					cur++;
 				}
+				timerChange = 1;
 				fade = 0;
 			}
 			// determines when the flash starts
