@@ -188,7 +188,7 @@ var programCode = function(processingInstance) {
 				textAlign(CENTER, CENTER);
 				text('Starring', 498, 125);
 			}
-			if(cur === 15) {
+			if(cur === 16) {
 				noStroke();
 				spotlight.x += spotlight.xc;
 				spotlight.y += spotlight.yc;
