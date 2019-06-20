@@ -2,97 +2,11 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Title Screen</title>
-	<style>
-		video {
- 			outline:none;
-		}
-		video::-webkit-media-text-track-display {
-			font-size: 80%;
-			color: rgb(150, 150, 150);
-		}
-	</style>
+	<title>Graduation Countdown</title>
+	<link rel="stylesheet" type="text/css" href="style.css"></link>
 </head>
 <body>
-	<div>
-		<video width="996" height="600" controls>
-			<source src="title_screen.mp4" type="video/mp4">
-			<track src="subtitles.vtt" kind="subtitles" srclang="en" label="English">
-		</video>
-	</div>
-	<div>
-		<table>
-			<tr>
-				<td>
-					CAMELOT SONG
-				</td>
-				<td>
-					<audio controls>
-						<source src="sounds/camelot.mp3" type="audio/mpeg">
-					</audio>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					LANCELOT SLAUGHTERING HELPLESS WEDDING GUESTS
-				</td>
-				<td>
-					<audio controls>
-						<source src="sounds/sword_battle.mp3" type="audio/mpeg">
-					</audio>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					WEDDING MUSIC
-				</td>
-				<td>
-					<audio controls>
-						<source src="sounds/medievalish_music.mp3" type="audio/mpeg">
-					</audio>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					INTERMISSION
-				</td>
-				<td>
-					<audio controls>
-						<source src="sounds/intermission.mp3" type="audio/mpeg">
-					</audio>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					EXPLOSION
-				</td>
-				<td>
-					<audio controls>
-						<source src="sounds/explosion.mp3" type="audio/mpeg">
-					</audio>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					BLACK BEAST OF ARRRGHHH
-				</td>
-				<td>
-					<audio controls>
-						<source src="sounds/monster_growl.mp3" type="audio/mpeg">
-					</audio>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					WEIRD THING I DON'T KNOW THE PURPOSE OF
-				</td>
-				<td>
-					<audio controls>
-						<source src="sounds/suspenseful_orchestral_string_hit.mp3" type="audio/mpeg">
-					</audio>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<p id="count"></p>
+	<script src="script.js"></script>
 </body>
 </html>
