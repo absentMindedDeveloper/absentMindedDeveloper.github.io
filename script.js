@@ -1,4 +1,4 @@
-var graduationDate = new Date("may 29, 2020 18:00:00").getTime();
+var graduationDate = new Date("may 31, 2020 18:00:00").getTime();
 
 var calc = setInterval(function() {
 	var cur = new Date().getTime();
